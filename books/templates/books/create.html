@@ -1,0 +1,45 @@
+{% extends 'student/layouts/base.html' %}
+
+{% load static %}
+
+{% block 'content' %}
+
+<style>
+
+    input[type="text"], input[type="number"] {
+        width: 80%; 
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+</style>
+
+<h1>Add new Book</h1>
+<form method='post' action="" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {% comment %} <label >Title:</label> <br>
+    {{ form.title }} <br><br> 
+    
+    <label >Author:</label> <br>
+    {{ form.author }}<br><br> 
+    
+    <label >Publication Year:</label> <br>
+    {{ form.publication_year }} <br> <br> 
+
+    <label >Available Copies:</label> <br>
+    {{ form.available_copies }} <br> <br>  {% endcomment %}
+
+    {{form}} <br>
+
+    <input type='submit' class="btn btn-success", value="Add">
+
+    
+</form>
+
+
+<script src="{% static 'student/script.js' %}"> </script>
+
+{% endblock %}

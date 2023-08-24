@@ -1,0 +1,40 @@
+{% extends 'student/layouts/base.html' %}
+
+{% load static %}
+
+{% block 'content' %}
+
+<h1> Edit Profile </h1> 
+
+<form method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                <strong>Error:</strong> Please correct the following errors:
+                <ul>
+                    {% for error in form.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        {% for field in form %}
+            {% if field.label == 'Password' %}
+                <h5>Want to change password ? <a href="{% url 'student.change_password' %}">Click here</a> </h5> 
+                
+            {% else %}
+                {{field.label}}: {{field}} <br>
+            {% endif %}
+        {% endfor %} <br>
+
+
+        <input type="submit" class="btn btn-success" value="Edit Profile">
+        <a href="{% url 'student.dashboard' %}"> <input type="button" class="btn btn-secondary mt-3" value="Back"> </a>
+        
+</form>
+<br> 
+    <script src="{% static 'student/script.js' %}"></script>   
+
+{% endblock %}

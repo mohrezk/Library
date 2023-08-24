@@ -1,0 +1,29 @@
+{% extends 'student/layouts/base.html'%}
+
+{% load static %}
+{% block 'title' %} Books {%endblock%}
+{% block 'content' %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Borrow Confirmation</title>
+    </head>
+    <body>
+        {% if not already_borrowed%}
+            <h1>Confirm Borrowing</h1>
+            <p>Do you want to borrow {{ book.title }}?</p>
+            <form method="post">
+                {% csrf_token %}
+                <label for="return_date">Return Date:</label>
+                <input type="date" id="return_date" name="return_date"  required> <br><br>
+                <button type="submit" class="btn btn-success">Confirm</button>
+                <a class="btn btn-dark" href="{% url 'book.list'%}"> Cancel </a>
+            </form>
+        {% else %}
+            <h2> You already borrowed a book return it first to borrow another one. <h2> <br>
+            <a class="btn btn-dark" href="{% url 'student.dashboard'%}"> Back </a>
+        {% endif %}
+    </body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'student/layouts/base.html' %}
+
+{% block 'content' %}
+
+
+<h1>Borrowed Books</h1>
+
+    {% if borrowed_books %}
+        <ul>
+            {% for borrowed_book in borrowed_books reversed %}
+                {% if not borrowed_book.returned %}
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ borrowed_book.book }}</h5>
+                            <p class="card-text">Borrow Date: {{ borrowed_book.borrow_date }}</p>
+                            <p class="card-text">Return Date: {{ borrowed_book.return_date }}</p>
+
+                            <a href="{% url 'book.return' borrowed_book.book.id %}" class="btn btn-secondary">Return</a>
+                        </div>
+                    </div> <hr> <h2> Books you borrowed before </h2>
+                {% else %}     
+                <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ borrowed_book.book }}</h5>
+                            <p class="card-text">Borrow Date: {{ borrowed_book.borrow_date }}</p>
+                            <p class="card-text">Return Date: {{ borrowed_book.return_date }}</p>
+                            {% if not returned_all %}
+                                <a href="{% url 'book.borrow' borrowed_book.book.id %}" class="btn btn-dark">Borrow Again</a> <br>
+                            {% endif %}
+                        </div>
+                </div> <br>
+                {% endif %}
+            {% endfor %} 
+        </ul>
+    {% else %}
+        <p>No books have been borrowed yet.</p>
+    {% endif %}
+
+{% endblock %}
+
+
+
+{% comment %} {% extends 'student/layouts/base.html'%}
+
+{% load static %}
+{% block 'title' %} Books {%endblock%}
+{% block 'content' %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <body>
+        <h1 style="text-align: center">Borrowed Books</h1>
+
+        <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                
+
+
+                            </div>
+                        </div>
+                    </div>
+        </div> 
+    </body>
+</html>
+
+
+{% endblock %} {% endcomment %}
+

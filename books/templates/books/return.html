@@ -1,0 +1,26 @@
+{% extends 'student/layouts/base.html'%}
+
+{% load static %}
+{% block 'title' %} Books {%endblock%}
+{% block 'content' %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Borrow Confirmation</title>
+    </head>
+    <body>
+
+        <h1>Confirm Return</h1>
+        <p>Do you want to return {{ book.title }}?</p>
+        <form method="post" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success">Confirm</button>
+            <a class="btn btn-dark" href="{% url 'student.dashboard'%}"> Cancel </a>
+
+        </form>
+        
+
+    </body>
+</html>
+
+{% endblock %}

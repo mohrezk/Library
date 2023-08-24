@@ -1,0 +1,46 @@
+{% extends 'student/layouts/base.html'%}
+
+{% load static %}
+{% block 'title' %} Books {%endblock%}
+{% block 'content' %}
+<!DOCTYPE html>
+<html lang="en">
+    
+    <body>
+        <h1 style="text-align: center">Books</h1>
+        {% if user.is_superuser %}
+        <a href="{% url 'book.create' %}" class="btn btn-success"> Add new Book</a><br> <br>
+        {% endif %}
+        <div class="row">
+            {% for book in books %}
+                {% if book.available_copies >= 1 %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img  src="{{book.get_image_url}}" width="150" height="150" class="mx-auto text-center mt-2">
+                            <div class="card-body">
+                                
+                                <h5 class="card-title">{{ book.title }}</h5>
+                                <p class="card-text">Author: {{ book.author }}</p>
+                                <p class="card-text">Available Copies: {{ book.available_copies }}</p>
+                                
+                                <a href="{% url 'book.details' book.id %}" class="btn btn-secondary">Details</a>
+
+                                {% if user.is_superuser %}
+                                <a href="{% url 'book.edit' book.id %}" class="btn btn-warning">Edit</a>
+                                <a href="{% url 'book.delete' book.id %}" class="btn btn-danger">Delete</a>
+                                {% endif %}
+                                
+
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+    </body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'student/layouts/base.html'%}
+
+{% load static %}
+{% block 'title' %} Student {%endblock%}
+{% block 'content' %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <body>
+        <div class="card">
+            <div class="card-body">
+
+                <h5 class="card-title">Username: {{ student.username }}</h5>
+                <p class="card-text">First Name: {{ student.first_name }}</p>
+                <p class="card-text">Last Name: {{ student.last_name }}</p>
+                <p class="card-text">Email: {{ student.email }}</p>
+
+                
+                <a href="{% url 'book.list' %}" class="btn btn-secondary mt-3">Back</a>
+
+            </div>
+             
+        
+        </div>
+        <br>
+
+    </body>
+</html>
+
+
+{% endblock %}

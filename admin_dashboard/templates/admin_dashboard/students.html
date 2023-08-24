@@ -1,0 +1,118 @@
+{% extends 'student/layouts/base.html' %}
+
+{% block 'content' %}
+
+<h1>Students</h1>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form action="" method="GET" class="d-flex">
+                <input type="text" name="query" class="form-control me-2" placeholder="Search...">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br><br>
+
+<div class="row">
+    <div class="col-md-4">
+
+        {% if search_query %}
+            {% for student in students %}
+                {% if student.student_id == search_query %}
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Username: {{ student.username }}</h5>
+                            <p class="card-text">{{ student.first_name }} {{ student.last_name }}</p>
+                            <a href="{% url 'student.details' student.id %}" class="btn btn-secondary">Student Details</a>
+                        </div>
+                    </div>
+                    <br>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            {% for student in students %}
+                {% if not student.username == request.user.username %}
+                    <div class="card">
+                        <div class="card-body">
+                            {% comment %} <h5 class="card-title">Username: {{ student.username }}</h5> {% endcomment %}
+                            <h5 class="card-title">Student ID: {{ student.student_id }} </h5>
+                            <p class="card-text">{{ student.first_name }} {{ student.last_name }}</p>
+                            <a href="{% url 'student.details' student.id %}" class="btn btn-secondary">Student Details</a>
+                        </div>
+                    </div>
+                    <br>
+                {% endif %} 
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} 
+{% extends 'student/layouts/base.html' %}
+
+{% block 'content' %}
+
+<h1>Students</h1>
+
+ <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <form action="/books/2" method="GET" class="d-flex">
+          <input type="text" name="query" class="form-control me-2" placeholder="Search...">
+          <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+      </div>
+    </div>
+</div> <br><br> 
+
+<div class="row">
+    <div class="col-md-4">
+
+        
+
+        {% for student in students %}
+            {% if not student.username == request.user.username %}
+            <div class="card">
+                <div class="card-body">
+                      <h5 class="card-title">Name: {{ student.username }}</h5> 
+                      <p class="card-text">{{ student.first_name }} {{ student.last_name }}</p>
+                      <a href="{% url 'student.details' student.id %}" class="btn btn-secondary">Student Details</a>
+                </div> 
+            </div> <br>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %} 
+
+{% endcomment %}

@@ -1,0 +1,17 @@
+{% extends 'student/layouts/base.html' %}
+
+{% load static %}
+
+{% block 'content' %}
+
+<h1> Delete Book </h1>
+<form method="post" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p> Are you sure you want to delete this Book: {{ book.title }}</p> 
+    <input type="submit" class="btn btn-danger", value="Delete"> 
+    <a class="btn btn-dark" href="{% url 'book.list'%}"> Cancel </a>
+</form>
+
+
+
+{% endblock %}
